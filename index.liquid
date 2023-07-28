@@ -1,0 +1,119 @@
+   <div id="timer" class="timer" data-endtime="25 august 2023 10:00:00 GMT+01:00"></div>
+
+
+<style>
+.timer-text{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+ }
+
+ .timer-text p{
+  color: #202223;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16.8px; 
+ }
+
+ .timer{
+  display: flex;
+  align-items: center;
+ }
+ .timer span {
+  display: inline-block;
+  margin: 0 3px;
+  position: relative;
+}
+.timer span > span {
+  display: block;
+  color: #6D7175;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 11px; 
+  background: none;
+}
+.timer span {
+  color: #202223;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px
+}
+
+
+.clone{
+  color: #202223;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px
+}
+</style>
+<script>
+  function Timer() {
+    var ending = jQuery("#timer").attr("data-endtime"),
+        endTime = new Date(ending);
+    endTime = Date.parse(endTime) / 1000;
+  
+    var now = new Date();
+    now = Date.parse(now) / 1000;
+  
+    var timeLeft = endTime - now;
+  
+    var days = Math.floor(timeLeft / 86400);
+    var hours = Math.floor((timeLeft - days * 86400) / 3600);
+    var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
+    var seconds = Math.floor(
+      timeLeft - days * 86400 - hours * 3600 - minutes * 60
+    );
+  
+    if (days < "10") {
+      days = "0" + days;
+    }
+    if (days < "1") {
+      days = "0";
+    }
+    if (hours < "10") {
+      hours = "0" + hours;
+    }
+    if (hours < "1") {
+      hours = "0";
+    }
+    if (minutes < "10") {
+      minutes = "0" + minutes;
+    }
+    if (minutes < "1") {
+      minutes = "0";
+    }
+    if (seconds < "10") {
+      seconds = "0" + seconds;
+    }
+    if (seconds < "1") {
+      seconds = "0";
+    }
+  
+    $("#timer").html(
+      "<span id='hours'>" +
+      hours +
+      "<span>Hrs</span></span>"+"<span class='clone'>:</span>" +
+      "<span id='minutes'>" +
+      minutes +
+      "<span>Mins</span></span>" + "<span class='clone'>:</span>" +
+      "<span id='seconds'>" +
+      seconds +
+      "<span>Secs</span></span>"
+    );
+  }
+  
+  setInterval(function() {
+    Timer();
+  }, 1000);
+</script>
